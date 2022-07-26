@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    transition: 200ms;
+}
+body{
+    background-color: #424242;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+#field{
+   
+    background-color: #737373;
+}
+#neuronsCanvas{
+   
+    background-color: #000;
+}
+.btns > button{
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+.btns > button:hover{
+    transform: scale(1.1);
+}
