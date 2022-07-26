@@ -8,10 +8,10 @@ const road = new Road(field.width/2, field.width*0.9)
 const N = 100;
 const cars = generateCars(N);
 const traffic = generateTraffic(100);
-let variance = 0.1;
-// let variance = localStorage.getItem("variance") ? parseFloat(localStorage.getItem("variance")) : 1;
+// let variance = 0.1;
+let variance = localStorage.getItem("variance") ? parseFloat(localStorage.getItem("variance")) : 1;
 let bestCar = cars[0];
-// let traintime = localStorage.getItem("traintime") ? parseFloat(localStorage.getItem("traintime")) : 10;
+let traintime = localStorage.getItem("traintime") ? parseFloat(localStorage.getItem("traintime")) : 10;
 if(localStorage.getItem("bestBrain")){
     for(let i=0; i<cars.length;i++){
         cars[i].brain=JSON.parse(localStorage.getItem("bestBrain"));
@@ -26,13 +26,13 @@ animate();
 
 function save(){
     localStorage.setItem("bestBrain", JSON.stringify(bestCar.brain));
-    // localStorage.setItem("variance", JSON.stringify(variance/1.5));
-    // localStorage.setItem("traintime", JSON.stringify(traintime+5)); 
+    localStorage.setItem("variance", JSON.stringify(variance/1.5));
+    localStorage.setItem("traintime", JSON.stringify(traintime+5)); 
 }
 function reset(){
     localStorage.removeItem("bestBrain", JSON.stringify(bestCar.brain));
-    // localStorage.setItem("variance", JSON.stringify(1));
-    // localStorage.setItem("traintime", JSON.stringify(10));
+    localStorage.setItem("variance", JSON.stringify(1));
+    localStorage.setItem("traintime", JSON.stringify(10));
 }
 
 function generateCars(N){
@@ -68,15 +68,15 @@ function animate(time){
         )
     );
 
-    // carCount = cars.map(c=> c.damaged ? 0 : 1 ).reduce((a,b)=> a+b);
-    // if(time/1000 > traintime){
-    //     save();
-    //     window.location.reload();
-    // }
-    // if(carCount <= N/10){
-    //     save();
-    //     window.location.reload();
-    // }
+    carCount = cars.map(c=> c.damaged ? 0 : 1 ).reduce((a,b)=> a+b);
+    if(time/1000 > traintime){
+        save();
+        window.location.reload();
+    }
+    if(carCount <= N/10){
+        save();
+        window.location.reload();
+    }
 
     field.height=window.innerHeight;
     neuronsCanvas.height=window.innerHeight;
