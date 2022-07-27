@@ -5,7 +5,7 @@ neuronsCanvas.width= 400;
 const ctx = field.getContext("2d");
 const neuronsctx = neuronsCanvas.getContext("2d");
 const road = new Road(field.width/2, field.width*0.9)
-const N = 100;
+const N = 2;
 const cars = generateCars(N);
 const traffic = generateTraffic(100);
 // let variance = 0.1;
@@ -26,7 +26,7 @@ animate();
 
 function save(){
     localStorage.setItem("bestBrain", JSON.stringify(bestCar.brain));
-    localStorage.setItem("variance", JSON.stringify(variance/1.5));
+    localStorage.setItem("variance", JSON.stringify(0.05 + variance/1.5));
     localStorage.setItem("traintime", JSON.stringify(traintime+5)); 
 }
 function reset(){
@@ -92,7 +92,7 @@ function animate(time){
         cars[i].draw(ctx);
     }
     ctx.globalAlpha = 1;
-    bestCar.draw(ctx, true, 'blue');
+    bestCar.draw(ctx, false, 'blue');
     ctx.restore();
     neuronsctx.lineDashOffset=-time/50;
     Visualizer.drawNetwork(neuronsctx, bestCar.brain);
